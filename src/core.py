@@ -37,7 +37,7 @@ def calculate_forecast_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict:
     }
 
 def plot_forecast(actual: np.ndarray, predicted: np.ndarray, title: str, output_path: Path):
- """Plot forecast vs actual """
+    """Plot forecast vs actual """
     fig, ax = plt.subplots(figsize=(10, 6))
     
     ax.plot(actual, label="Actual", color="#4A90A4", linewidth=1.2)
