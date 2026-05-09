@@ -58,7 +58,7 @@ def main():
     X_train, X_test = X[:train_size], X[train_size:]
     y_train, y_test = y[:train_size], y[train_size:]
     
-            y_pred = np.mean(X_test, axis=1)
+    y_pred = np.mean(X_test, axis=1)
     
     metrics = calculate_forecast_metrics(y_test, y_pred)
     logging.info(f"\nForecast Metrics:")
