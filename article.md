@@ -1,32 +1,24 @@
+---
+author: "Kyle Jones"
+date_published: "April 7, 2025"
+date_exported_from_medium: "November 10, 2025"
+canonical_link: "https://medium.com/@kyle-t-jones/forecasting-retail-sales-with-kolmogorov-arnold-networks-kans-beating-arima-with-deep-function-40c3f8d07fb2"
+---
+
 # Forecasting Retail Sales with Kolmogorov-Arnold Networks (KANs): Beating ARIMA with Deep Function... Kolmogorov-Arnold Networks (KANs) are neural network architectures based
 on the Kolmogorov-Arnold representation theorem, which states that...
 
 ### Forecasting Retail Sales with Kolmogorov-Arnold Networks (KANs): Beating ARIMA with Deep Function Approximation
-Kolmogorov-Arnold Networks (KANs) are neural network architectures based
-on the Kolmogorov-Arnold representation theorem, which states that any
-multivariate continuous function can be expressed as a sum of continuous
-univariate functions and an auxiliary function. This makes KANs highly
-expressive and well-suited for modeling complex, non-linear
-relationships in time series data.
+Kolmogorov-Arnold Networks (KANs) are neural network architectures based on the Kolmogorov-Arnold representation theorem, which states that any multivariate continuous function can be expressed as a sum of continuous univariate functions and an auxiliary function. This makes KANs highly expressive and well-suited for modeling complex, non-linear relationships in time series data.
 
-KANs can represent complex, non-linear dependencies between variables.
-They help reduce dimensionality. They approximate any continuous
-function, making them flexible for various time series applications.
+KANs can represent complex, non-linear dependencies between variables. They help reduce dimensionality. They approximate any continuous function, making them flexible for various time series applications.
 
-In this project, we apply KANs to a real-world time series forecasting
-task using U.S. retail sales data from FRED. We compare it head-to-head
-with ARIMA, the workhorse of classical forecasting, and the results are
-surprising.
+In this project, we apply KANs to a real-world time series forecasting task using U.S. retail sales data from FRED. We compare it head-to-head with ARIMA, the workhorse of classical forecasting, and the results are surprising.
 
-We use the monthly U.S. Retail Sales Excluding Food Services index
-(RSXFS) from the Federal Reserve Economic Data (FRED) API. This dataset
-spans over a decade and reflects long-term economic growth, short-term
-shocks like COVID-19, and seasonality around holiday cycles.
+We use the monthly U.S. Retail Sales Excluding Food Services index (RSXFS) from the Federal Reserve Economic Data (FRED) API. This dataset spans over a decade and reflects long-term economic growth, short-term shocks like COVID-19, and seasonality around holiday cycles.
 
 #### Kolmogorov-Arnold Network (KAN)
-KANs are universal approximators based on univariate decomposition. Our
-simple model trains over 100 epochs using the past 12 months of retail
-sales
+KANs are universal approximators based on univariate decomposition. Our simple model trains over 100 epochs using the past 12 months of retail sales
 
 ```python
 class KolmogorovArnoldNetwork(nn.Module):
@@ -40,8 +32,7 @@ def forward(self, x):
         return self.aggregation(h)
 ```
 
-We used a rolling window to structure input sequences and trained the
-model on 80% of the data, using the remaining 20% for testing.
+We used a rolling window to structure input sequences and trained the model on 80% of the data, using the remaining 20% for testing.
 
 ARIMA is the gold standard in time series forecasting.
 
@@ -50,8 +41,7 @@ from statsmodels.tsa.arima.model import ARIMA
 model_arima = ARIMA(train_values, order=(5, 1, 0)).fit()
 ```
 
-It models autoregression, differencing, and moving averages --- but
-doesn't handle non-linear relationships directly.
+It models autoregression, differencing, and moving averages --- but doesn't handle non-linear relationships directly.
 
 ### Evaluation
 We compared models using Root Mean Squared Error (RMSE) on the test set.
@@ -62,9 +52,7 @@ ARIMA: 18,121.76
 
 KAN outperformed ARIMA. It had an RMSE 60% lower than ARIMA.
 
-This confirms KAN's strength in capturing non-linear dynamics that
-traditional models can miss. Despite its simplicity, the KAN generalizes
-well and tracks short-term variation without overfitting.
+This confirms KAN's strength in capturing non-linear dynamics that traditional models can miss. Despite its simplicity, the KAN generalizes well and tracks short-term variation without overfitting.
 
 Here's what that looks like visually:
 
@@ -75,20 +63,14 @@ Here's what that looks like visually:
 
 
 ### Why Did KAN Win?
-The tanh activation allows KANs to shape highly non-linear curves. Even
-with a shallow network, KANs can outperform if the problem has
-complexity ARIMA can't model. The 12-month rolling input gives the model
-temporal context.
+The tanh activation allows KANs to shape highly non-linear curves. Even with a shallow network, KANs can outperform if the problem has complexity ARIMA can't model. The 12-month rolling input gives the model temporal context.
 
 ### Takeaways
-KANs are easy to build in PyTorch. You can get state-of-the-art results
-on real-world data with just a few lines of code.
+KANs are easy to build in PyTorch. You can get state-of-the-art results on real-world data with just a few lines of code.
 
-ARIMA is still useful --- but in domains with non-linear growth, shocks,
-or nonstationary behavior, deep learning methods can shine.
+ARIMA is still useful --- but in domains with non-linear growth, shocks, or nonstationary behavior, deep learning methods can shine.
 
-The retail sales dataset (RSXFS) is a useful
-benchmark --- interpretable, real, and rich with structure.
+The retail sales dataset (RSXFS) is a useful benchmark --- interpretable, real, and rich with structure.
 
 Full code
 
@@ -311,12 +293,3 @@ plt.show()
 results.reset_index(names="Model", inplace=True)
 
 ```
-
-
-::::::::By [Kyle Jones](https://medium.com/@kyle-t-jones) on
-[April 7, 2025](https://medium.com/p/40c3f8d07fb2).
-
-[Canonical
-link](https://medium.com/@kyle-t-jones/forecasting-retail-sales-with-kolmogorov-arnold-networks-kans-beating-arima-with-deep-function-40c3f8d07fb2)
-
-Exported from [Medium](https://medium.com) on November 10, 2025.
