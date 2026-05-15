@@ -24,7 +24,7 @@ def load_config(config_path: Path = None) -> dict:
     if config_path is None:
         config_path = Path(__file__).parent / 'config.yaml'
     
-    with open(config_path, 'r') as f:
+    with open(config_path) as f:
         return yaml.safe_load(f)
 
 def main():
@@ -55,13 +55,13 @@ def main():
         X, y = create_lagged_features(sales, config['model']['lag'])
     
     train_size = int(len(X) * config['model']['train_size'])
-    X_train, X_test = X[:train_size], X[train_size:]
-    y_train, y_test = y[:train_size], y[train_size:]
+    _X_train, X_test = X[:train_size], X[train_size:]
+    _y_train, y_test = y[:train_size], y[train_size:]
     
     y_pred = np.mean(X_test, axis=1)
     
     metrics = calculate_forecast_metrics(y_test, y_pred)
-    logging.info(f"\nForecast Metrics:")
+    logging.info("\nForecast Metrics:")
     logging.info(f"RMSE: {metrics['rmse']:.2f}")
     logging.info(f"MAE: {metrics['mae']:.2f}")
     

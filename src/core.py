@@ -3,8 +3,6 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import Tuple
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import matplotlib.pyplot as plt
 import logging
@@ -20,7 +18,7 @@ def prepare_sales_data(df: pd.DataFrame, date_col: str, sales_col: str) -> pd.Da
     df = df.set_index(date_col)
     return df
 
-def create_lagged_features(data: pd.Series, lag: int = 7) -> Tuple[np.ndarray, np.ndarray]:
+def create_lagged_features(data: pd.Series, lag: int = 7) -> tuple[np.ndarray, np.ndarray]:
     """Create lagged features for time series."""
     X, y = [], []
     for i in range(lag, len(data)):
