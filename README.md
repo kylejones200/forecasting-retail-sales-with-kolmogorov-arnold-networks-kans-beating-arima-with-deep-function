@@ -42,3 +42,11 @@ KANs are a new type of neural network:
 - By default, generates synthetic sales data.
 - Full KAN implementation requires additional dependencies.
 - Model performance depends on data quality and preprocessing.
+
+## Disclaimer
+
+Educational/demo code only. Not financial, safety, or engineering advice. Use at your own risk. Verify results independently before any production or operational use.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
