@@ -2,6 +2,14 @@
 
 This project demonstrates forecasting retail sales using Kolmogorov-Arnold Networks (KANs).
 
+## Business context
+
+Kolmogorov-Arnold Networks (KANs) are neural network architectures based on the Kolmogorov-Arnold representation theorem, which states that any multivariate continuous function can be expressed as a sum of continuous univariate functions and an auxiliary function. This makes KANs highly expressive and well-suited for modeling complex, non-linear relationships in time series data.
+
+KANs can represent complex, non-linear dependencies between variables. They help reduce dimensionality. They approximate any continuous function, making them flexible for various time series applications.
+
+In this project, we apply KANs to a real-world time series forecasting task using U.S. retail sales data from FRED. We compare it head-to-head with ARIMA, the workhorse of classical forecasting, and the results are surprising.
+
 ## Article
 
 Medium article: [Forecasting Retail Sales with Kolmogorov-Arnold Networks (KANs): Beating ARIMA with Deep Function Learning](https://medium.com/@kylejones_47003/forecasting-retail-sales-with-kolmogorov-arnold-networks-kans-beating-arima-with-deep-function-40c3f8d07fb2)
