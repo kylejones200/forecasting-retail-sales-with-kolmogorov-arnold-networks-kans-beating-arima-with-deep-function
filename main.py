@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 
 
-def load_config(config_path: Path = None) -> dict:
+def load_config(config_path: Path | None = None) -> dict:
     """Load configuration from YAML file."""
     if config_path is None:
         config_path = Path(__file__).parent / "config.yaml"
@@ -42,7 +42,6 @@ def main():
         "--output-dir", type=Path, default=None, help="Output directory"
     )
     args = parser.parse_args()
-
     config = load_config(args.config)
     output_dir = (
         Path(args.output_dir)
@@ -50,7 +49,6 @@ def main():
         else Path(config["output"]["figures_dir"])
     )
     output_dir.mkdir(exist_ok=True)
-
     if args.data_path and args.data_path.exists():
         df = pd.read_csv(args.data_path)
         df = prepare_sales_data(
@@ -70,24 +68,19 @@ def main():
         )
     else:
         raise ValueError("No data source specified")
-
         X, y = create_lagged_features(sales, config["model"]["lag"])
 
     train_size = int(len(X) * config["model"]["train_size"])
     _X_train, X_test = X[:train_size], X[train_size:]
     _y_train, y_test = y[:train_size], y[train_size:]
-
     y_pred = np.mean(X_test, axis=1)
-
     metrics = calculate_forecast_metrics(y_test, y_pred)
     logging.info("\nForecast Metrics:")
     logging.info(f"RMSE: {metrics['rmse']:.2f}")
     logging.info(f"MAE: {metrics['mae']:.2f}")
-
     plot_forecast(
         y_test, y_pred, "Retail Sales Forecast", output_dir / "sales_forecast.png"
     )
-
     logging.info(f"\nAnalysis complete. Figures saved to {output_dir}")
 
 
